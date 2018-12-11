@@ -1,0 +1,12 @@
+@charset "utf-8";
+.content{width:1000px;height:860px;background:;margin:auto;padding:10px 0px 20px 0px;clear:both;}
+.content .content_box{width:1000px;height:;margin:auto;}
+.content .content_box h2{font-size:20px;padding:10px 5px;color:rgb(255,0,98);}
+
+.content_border{width:1000px;height:840px;}
+.content_dream{width:33.3%;height:200px;float:left;background:;}
+.content_dream_box{width:320px;height:190px;border:1px solid rgb(212,212,212);margin:5px 5px}
+.content_dream .content_dream_box div{height:70px;padding:61px 20px;}
+.content_dream .content_dream_box div p{line-height:30px;padding:0px 0px;}
+.content_dream .content_dream_box div p span{color:#aaa;}
+

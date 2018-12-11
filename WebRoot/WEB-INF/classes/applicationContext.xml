@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- 数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/wkmoko?characterEncoding=utf-8">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value=""></property>
+	</bean>
+
+	<!-- session工厂 -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>				
+				<value>com/chenzi/admin/vo/Auser.hbm.xml</value>
+				<value>com/chenzi/admin/vo/Link.hbm.xml</value>
+				<value>com/chenzi/admin/vo/Article.hbm.xml</value>
+				<value>com/chenzi/admin/vo/User.hbm.xml</value>
+				<value>com/chenzi/admin/vo/Company.hbm.xml</value>
+				<value>com/chenzi/admin/vo/Recruitinfo.hbm.xml</value>
+				<value>com/chenzi/admin/vo/Enrollinfo.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 基类DAO -->
+	<bean id="baseDAO" class="com.chenzi.admin.dao.BaseDAO">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- admin -->
+	<bean id="auserDAO" class="com.chenzi.admin.dao.impl.AuserDAO" parent="baseDAO"></bean>
+	<bean id="auserService" class="com.chenzi.admin.service.impl.AuserService">
+		<property name="auserDAO" ref="auserDAO"></property>
+	</bean>
+	<bean id="adminAction" class="com.chenzi.admin.action.AdminAction">
+		<property name="auserService" ref="auserService"></property>
+	</bean>
+	
+	<bean id="linkDAO" class="com.chenzi.admin.dao.impl.LinkDAO" parent="baseDAO"></bean>
+	<bean id="linkService" class="com.chenzi.admin.service.impl.LinkService">
+		<property name="linkDAO" ref="linkDAO"></property>
+	</bean>
+	<bean id="linkAction" class="com.chenzi.admin.action.LinkAction">
+		<property name="linkService" ref="linkService"></property>
+	</bean>
+	
+	<bean id="articleDAO" class="com.chenzi.admin.dao.impl.ArticleDAO" parent="baseDAO"></bean>
+	<bean id="articleService" class="com.chenzi.admin.service.impl.ArticleService">
+		<property name="articleDAO" ref="articleDAO"></property>
+	</bean>
+	<bean id="articleAction" class="com.chenzi.admin.action.ArticleAction">
+		<property name="articleService" ref="articleService"></property>
+	</bean>
+	
+	<bean id="userDAO" class="com.chenzi.admin.dao.impl.UserDAO" parent="baseDAO"></bean>
+	<bean id="userService" class="com.chenzi.admin.service.impl.UserService">
+		<property name="userDAO" ref="userDAO"></property>
+	</bean>
+	<bean id="userAction" class="com.chenzi.admin.action.UserAction">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<bean id="companyDAO" class="com.chenzi.admin.dao.impl.CompanyDAO" parent="baseDAO"></bean>
+	<bean id="companyService" class="com.chenzi.admin.service.impl.CompanyService">
+		<property name="companyDAO" ref="companyDAO"></property>
+	</bean>
+	<bean id="companyAction" class="com.chenzi.admin.action.CompanyAction">
+		<property name="companyService" ref="companyService"></property>
+	</bean>
+	
+	
+	
+	<!-- home -->
+	<bean id="userhomeDAO" class="com.chenzi.home.dao.impl.UserDAO" parent="baseDAO"></bean>
+	<bean id="userhomeService" class="com.chenzi.home.service.impl.UserService">
+		<property name="userhomeDAO" ref="userhomeDAO"></property>
+	</bean>
+	<bean id="userhomeAction" class="com.chenzi.home.action.UserAction">
+		<property name="userhomeService" ref="userhomeService"></property>
+	</bean>
+	
+	<bean id="companyhomeDAO" class="com.chenzi.home.dao.impl.CompanyDAO" parent="baseDAO"></bean>
+	<bean id="companyhomeService" class="com.chenzi.home.service.impl.CompanyService">
+		<property name="companyhomeDAO" ref="companyhomeDAO"></property>
+	</bean>
+	<bean id="companyhomeAction" class="com.chenzi.home.action.CompanyAction">
+		<property name="companyhomeService" ref="companyhomeService"></property>
+	</bean>
+	
+	<bean id="recruithomeDAO" class="com.chenzi.home.dao.impl.RecruitDAO" parent="baseDAO"></bean>
+	<bean id="recruithomeService" class="com.chenzi.home.service.impl.RecruitService">
+		<property name="recruithomeDAO" ref="recruithomeDAO"></property>
+	</bean>
+	<bean id="recruithomeAction" class="com.chenzi.home.action.RecruitAction">
+		<property name="recruithomeService" ref="recruithomeService"></property>
+		<property name="companyhomeService" ref="companyhomeService"></property>
+	</bean>
+	
+	<bean id="articlehomeDAO" class="com.chenzi.home.dao.impl.ArticleDAO" parent="baseDAO"></bean>
+	<bean id="articlehomeService" class="com.chenzi.home.service.impl.ArticleService">
+		<property name="articlehomeDAO" ref="articlehomeDAO"></property>
+	</bean>
+	<bean id="articlehomeAction" class="com.chenzi.home.action.ArticleAction">
+		<property name="articlehomeService" ref="articlehomeService"></property>
+	</bean>
+	
+	<bean id="enrollhomeDAO" class="com.chenzi.home.dao.impl.EnrollDAO" parent="baseDAO"></bean>
+	<bean id="enrollhomeService" class="com.chenzi.home.service.impl.EnrollService">
+		<property name="enrollhomeDAO" ref="enrollhomeDAO"></property>
+	</bean>
+	<bean id="enrollhomeAction" class="com.chenzi.home.action.EnrollAction">
+		<property name="enrollhomeService" ref="enrollhomeService"></property>
+		<property name="userhomeService" ref="userhomeService"></property>
+	</bean>
+	
+	<bean id="createImageAction" class="com.chenzi.admin.action.CreateImageAction" scope="prototype"></bean>
+</beans>

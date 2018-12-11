@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 使用国际编码UTF-8，防止提交表单乱码 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	
+	<package name="struts" namespace="/" extends="struts-default">
+		<!-- 全局设置错误页面 -->
+		<global-results>
+			<result name="error">/error.jsp</result>
+		</global-results>
+		
+		<!-- 跳转后台登录页面 -->
+		<action name="adminRedirect" class="adminAction" method="adminRedirect">
+			<result name="success">/WEB-INF/admin/admin.jsp</result>
+		</action>
+		
+		<!-- 跳转后台登陆成功页面 -->
+		<action name="adminManager" class="adminAction" method="adminManager">
+			<result name="success">/WEB-INF/admin/index.jsp</result>
+		</action>
+		
+		<!-- 后台登录 -->
+		<action name="alogin" class="adminAction" method="dologin">
+			<result name="success" type="redirectAction">adminManager</result>
+			<result name="error" type="redirectAction">adminRedirect</result>
+		</action>
+		
+		<!-- 图片验证码 -->
+		<action name="createImage" class="createImageAction" method="createImage">
+			<result name="success" type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+		
+		<!-- 后台注销 -->
+		<action name="alogout" class="adminAction" method="dologout">
+			<result name="success">/WEB-INF/admin/admin.jsp</result>
+		</action>
+		
+		<!-- 系统管理员分页列表 -->
+		<action name="auserListPaging" class="adminAction" method="auserListPaging">
+			<result name="success">/WEB-INF/admin/auser_list.jsp</result>
+		</action>
+		
+		<!-- 系统管理员新增编辑 -->
+		<action name="auserInsertEdit" class="adminAction" method="auserInsertEdit">
+			<result name="success">/WEB-INF/admin/auser_insertEdit.jsp</result>
+		</action>
+		
+		<!-- 系统管理员新增 -->
+		<action name="auserInsert" class="adminAction" method="auserInsert">
+			<result name="success" type="redirectAction">auserListPaging</result>
+		</action>
+		
+		<!-- 系统管理员删除 -->
+		<action name="auserDelete" class="adminAction" method="auserDelete">
+			<result name="success" type="redirectAction">auserListPaging</result>
+		</action>
+		
+		<!-- 系统管理员修改编辑 -->
+		<action name="auserUpdateEdit" class="adminAction" method="auserUpdateEdit">
+			<result name="success">/WEB-INF/admin/auser_updateEdit.jsp</result>
+		</action>
+		
+		<!-- 系统管理员修改 -->
+		<action name="auserUpdate" class="adminAction" method="auserUpdate">
+			<result name="success" type="redirectAction">auserListPaging</result>
+		</action>
+		
+		<!-- 系统管理员查询 -->
+		<action name="auserQuery" class="adminAction" method="auserQuery">
+			<result name="success">/WEB-INF/admin/auser_query.jsp</result>
+		</action>
+		
+		<!-- 友情链接分页列表 -->
+		<action name="linkListPaging" class="linkAction" method="linkListPaging">
+			<result name="success">/WEB-INF/admin/link_list.jsp</result>
+		</action>
+		
+		<!-- 友情链接新增编辑 -->
+		<action name="linkInsertEdit" class="linkAction" method="linkInsertEdit">
+			<result name="success">/WEB-INF/admin/link_insertEdit.jsp</result>
+		</action>
+		
+		<!-- 友情链接新增 -->
+		<action name="linkInsert" class="linkAction" method="linkInsert">
+			<result name="success" type="redirectAction">linkListPaging</result>
+		</action>
+		
+		<!-- 友情链接删除 -->
+		<action name="linkDelete" class="linkAction" method="linkDelete">
+			<result name="success" type="redirectAction">linkListPaging</result>
+		</action>
+		
+		<!-- 友情链接修改编辑 -->
+		<action name="linkUpdateEdit" class="linkAction" method="linkUpdateEdit">
+			<result name="success">/WEB-INF/admin/link_updateEdit.jsp</result>
+		</action>
+		
+		<!-- 友情链接修改 -->
+		<action name="linkUpdate" class="linkAction" method="linkUpdate">
+			<result name="success" type="redirectAction">linkListPaging</result>
+		</action>
+		
+		<!-- 友情链接查询 -->
+		<action name="linkQuery" class="linkAction" method="linkQuery">
+			<result name="success">/WEB-INF/admin/link_query.jsp</result>
+		</action>
+		
+		<!-- 新闻资讯分页列表 -->
+		<action name="articleListPaging" class="articleAction" method="articleListPaging">
+			<result name="success">/WEB-INF/admin/article_list.jsp</result>
+		</action>
+		
+		<!-- 新闻资讯新增编辑 -->
+		<action name="articleInsertEdit" class="articleAction" method="articleInsertEdit">
+			<result name="success">/WEB-INF/admin/article_insertEdit.jsp</result>
+		</action>
+		
+		<!-- 新闻资讯新增 -->
+		<action name="articleInsert" class="articleAction" method="articleInsert">
+			<result name="success" type="redirectAction">articleListPaging</result>
+		</action>
+		
+		<!-- 新闻资讯删除 -->
+		<action name="articleDelete" class="articleAction" method="articleDelete">
+			<result name="success" type="redirectAction">articleListPaging</result>
+		</action>
+		
+		<!-- 新闻资讯修改编辑 -->
+		<action name="articleUpdateEdit" class="articleAction" method="articleUpdateEdit">
+			<result name="success">/WEB-INF/admin/article_updateEdit.jsp</result>
+		</action>
+		
+		<!-- 新闻资讯修改 -->
+		<action name="articleUpdate" class="articleAction" method="articleUpdate">
+			<result name="success" type="redirectAction">articleListPaging</result>
+		</action>
+		
+		<!-- 新闻资讯查询 -->
+		<action name="articleQuery" class="articleAction" method="articleQuery">
+			<result name="success">/WEB-INF/admin/article_query.jsp</result>
+		</action>
+		
+		<!-- 模特会员分页列表 -->
+		<action name="userListPaging" class="userAction" method="userListPaging">
+			<result name="success">/WEB-INF/admin/user_list.jsp</result>
+		</action>
+		
+		<!-- 模特会员新增编辑 -->
+		<action name="userInsertEdit" class="userAction" method="userInsertEdit">
+			<result name="success">/WEB-INF/admin/user_insertEdit.jsp</result>
+		</action>
+		
+		<!-- 模特会员新增 -->
+		<action name="userInsert" class="userAction" method="userInsert">
+			<result name="success" type="redirectAction">userListPaging</result>
+		</action>
+		
+		<!-- 模特会员删除 -->
+		<action name="userDelete" class="userAction" method="userDelete">
+			<result name="success" type="redirectAction">userListPaging</result>
+		</action>
+		
+		<!-- 模特会员修改编辑 -->
+		<action name="userUpdateEdit" class="userAction" method="userUpdateEdit">
+			<result name="success">/WEB-INF/admin/user_updateEdit.jsp</result>
+		</action>
+		
+		<!-- 模特会员修改 -->
+		<action name="userUpdate" class="userAction" method="userUpdate">
+			<result name="success" type="redirectAction">userListPaging</result>
+		</action>
+		
+		<!-- 模特会员查询 -->
+		<action name="userQuery" class="userAction" method="userQuery">
+			<result name="success">/WEB-INF/admin/user_query.jsp</result>
+		</action>
+		
+		<!-- 企业会员分页列表 -->
+		<action name="companyListPaging" class="companyAction" method="companyListPaging">
+			<result name="success">/WEB-INF/admin/company_list.jsp</result>
+		</action>
+		
+		<!-- 企业会员新增编辑 -->
+		<action name="companyInsertEdit" class="companyAction" method="companyInsertEdit">
+			<result name="success">/WEB-INF/admin/company_insertEdit.jsp</result>
+		</action>
+		
+		<!-- 企业会员新增 -->
+		<action name="companyInsert" class="companyAction" method="companyInsert">
+			<result name="success" type="redirectAction">companyListPaging</result>
+		</action>
+		
+		<!-- 企业会员删除 -->
+		<action name="companyDelete" class="companyAction" method="companyDelete">
+			<result name="success" type="redirectAction">companyListPaging</result>
+		</action>
+		
+		<!-- 企业会员修改编辑 -->
+		<action name="companyUpdateEdit" class="companyAction" method="companyUpdateEdit">
+			<result name="success">/WEB-INF/admin/company_updateEdit.jsp</result>
+		</action>
+		
+		<!-- 企业会员修改 -->
+		<action name="companyUpdate" class="companyAction" method="companyUpdate">
+			<result name="success" type="redirectAction">companyListPaging</result>
+		</action>
+		
+		<!-- 企业会员查询 -->
+		<action name="companyQuery" class="companyAction" method="companyQuery">
+			<result name="success">/WEB-INF/admin/company_query.jsp</result>
+		</action>
+		
+		
+		
+		
+		
+		<!-- 跳转网站首页 -->
+		<action name="homeRedirect" class="userhomeAction" method="homeRedirect">
+			<result name="success">index.jsp</result>
+		</action>
+		
+		<!-- 跳转登录页面 -->
+		<action name="loginRedirect" class="userhomeAction" method="loginRedirect">
+			<result name="success">login.jsp</result>
+		</action>
+		
+		<!-- 跳转企业注册页面 -->
+		<action name="comregisterRedirect" class="companyhomeAction" method="comregisterRedirect">
+			<result name="success">/WEB-INF/home/company_regester.jsp</result>
+		</action>
+		
+		<!-- 跳转企业登录页面 -->
+		<action name="comloginRedirect" class="companyhomeAction" method="comloginRedirect">
+			<result name="success">/WEB-INF/home/company_login.jsp</result>
+		</action>
+		
+		<!-- 遍历显示16个模特会员 -->
+		<action name="userInfo" class="userhomeAction" method="userInfo">
+			<result name="success">/WEB-INF/home/body.jsp</result>
+		</action>
+		
+		<!-- 遍历显示全部模特会员  人才库 -->
+		<action name="personnel" class="userhomeAction" method="personnel">
+			<result name="success">/WEB-INF/home/personnelPaging.jsp</result>
+		</action>
+		
+		<!-- 浏览模特 -->
+		<action name="browseUser" class="userhomeAction" method="browseUser">
+			<result name="success">/WEB-INF/home/user_detail.jsp</result>
+		</action>
+		
+		<!-- 模特会员注册成功，跳转登录页面 -->
+		<action name="userRegester" class="userhomeAction" method="userRegester">
+			<result name="success" type="redirectAction">loginRedirect</result>
+		</action>
+		
+		<!-- 模特会员登陆成功，跳转到网站首页 -->
+		<action name="userLogin" class="userhomeAction" method="userLogin">
+			<result name="success" type="redirectAction">homeRedirect</result>
+			<result name="error" type="redirectAction">loginRedirect</result>
+		</action>
+		
+		<!-- 模特会员登陆注销 -->
+		<action name="userLoginOut" class="userhomeAction" method="userLoginOut">
+			<result name="success" type="redirectAction">homeRedirect</result>
+		</action>
+		
+		<!-- 模特会员进入个人中心 -->
+		<action name="userCenter" class="userhomeAction" method="userCenter">
+			<result name="success">/WEB-INF/home/user_center.jsp</result>
+		</action>
+		
+		<!-- 模特会员修改个人资料编辑 -->
+		<action name="userUpdateHomeEdit" class="userhomeAction" method="userUpdateHomeEdit">
+			<result name="success">/WEB-INF/home/user_updateEdit.jsp</result>
+		</action>
+		
+		<!-- 模特会员修改个人资料 -->
+		<action name="userUpdateHome" class="userhomeAction" method="userUpdateHome">
+			<result name="success" type="redirectAction">loginRedirect</result>
+		</action>
+		
+		<!-- 模特会员修改个人头像编辑 -->
+		<action name="userUpdateHeadImgEdit" class="userhomeAction" method="userUpdateHeadImgEdit">
+			<result name="success">/WEB-INF/home/uploadHeadImg.jsp</result>
+		</action>
+		
+		<!-- 模特会员上传头像到服务器并显示 -->
+		<action name="postPhoto" class="userhomeAction" method="postPhoto"></action>
+		
+		<!-- 模特会员修改个人头像 -->
+		<action name="userUpdateHeadImg" class="userhomeAction" method="userUpdateHeadImg">
+			<result name="success" type="redirectAction">userCenter</result>
+		</action>
+		
+		<!-- 遍历显示新闻资讯 -->
+		<action name="articleInfo" class="articlehomeAction" method="articleInfo">
+			<result name="success">/WEB-INF/home/news_limit.jsp</result>
+		</action>
+		
+		<!-- 详情查看新闻资讯 -->
+		<action name="articleDetail" class="articlehomeAction" method="articleDetail">
+			<result name="success">/WEB-INF/home/news_detail.jsp</result>
+		</action>
+		
+		<!-- 企业会员注册成功，跳转登录页面 -->
+		<action name="companyRegester" class="companyhomeAction" method="companyRegester">
+			<result name="success" type="redirectAction">comloginRedirect</result>
+		</action>
+		
+		<!-- 企业会员登陆成功，跳转到网站首页 -->
+		<action name="companyLogin" class="companyhomeAction" method="companyLogin">
+			<result name="success" type="redirectAction">homeRedirect</result>
+			<result name="error" type="redirectAction">comloginRedirect</result>
+		</action>
+		
+		<!-- 企业会员登陆注销 -->
+		<action name="companyLoginOut" class="companyhomeAction" method="companyLoginOut">
+			<result name="success" type="redirectAction">homeRedirect</result>
+		</action>
+		
+		<!-- 企业会员进入个人中心 -->
+		<action name="companyCenter" class="companyhomeAction" method="companyCenter">
+			<result name="success">/WEB-INF/home/company_center.jsp</result>
+		</action>
+		
+		<!-- 企业会员修改企业资料编辑 -->
+		<action name="companyUpdateHomeEdit" class="companyhomeAction" method="companyUpdateHomeEdit">
+			<result name="success">/WEB-INF/home/company_updateEdit.jsp</result>
+		</action>
+		
+		<!-- 企业会员修改个人资料 -->
+		<action name="companyUpdateHome" class="companyhomeAction" method="companyUpdateHome">
+			<result name="success" type="redirectAction">comloginRedirect</result>
+		</action>
+		
+		<!-- 遍历显示全部企业会员  梦工场 -->
+		<action name="dreamfactory" class="companyhomeAction" method="dreamfactory">
+			<result name="success">/WEB-INF/home/dreamfactoryPaging.jsp</result>
+		</action>
+		
+		<!-- 企业发布招聘信息编辑 -->
+		<action name="recruitInsertHomeEdit" class="recruithomeAction" method="recruitInsertHomeEdit">
+			<result name="success">/WEB-INF/home/recruit_insertEdit.jsp</result>
+		</action>
+		
+		<!-- 企业发布招聘信息 -->
+		<action name="recruitInsertHome" class="recruithomeAction" method="recruitInsertHome">
+			<result name="success" type="redirectAction">companyCenter</result>
+		</action>
+		
+		<!-- 企业招聘信息列表 -->
+		<action name="recruitInfoHome" class="recruithomeAction" method="recruitInfoHome">
+			<result name="success">/WEB-INF/home/recruit_success.jsp</result>
+		</action>
+		
+		<!-- 遍历显示全部招聘信息  机遇 -->
+		<action name="chance" class="recruithomeAction" method="chance">
+			<result name="success">/WEB-INF/home/chancePaging.jsp</result>
+		</action>
+		
+		<!-- 模特会员申请职位 -->
+		<action name="EnrollInsertHome" class="enrollhomeAction" method="EnrollInsertHome">
+			<result name="success" type="redirectAction">chance</result>
+		</action>
+		
+		<!-- 个人已申请的招聘职位记录 -->
+		<action name="enrollInfoHome" class="enrollhomeAction" method="enrollInfoHome">
+			<result name="success">/WEB-INF/home/enroll_success.jsp</result>
+		</action>
+		
+		<!-- 企业已收到的申请职位记录 -->
+		<action name="enrollInfoForCom" class="enrollhomeAction" method="enrollInfoForCom">
+			<result name="success">/WEB-INF/home/enrol_forCompany.jsp</result>
+		</action>
+	</package>
+</struts>    

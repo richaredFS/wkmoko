@@ -1,0 +1,11 @@
+@charset "utf-8";
+.content{width:1000px;height:1365px;background:;margin:auto;padding:10px 0px 20px 0px;clear:both;}
+.content .content_box{width:1000px;height:;margin:auto;}
+.content .content_box h2{font-size:20px;padding:10px 5px;color:rgb(255,0,98);}
+
+.content_moko{float:left;}
+.content_moko img{padding:5px;}
+.content_moko p{padding:5px;font-size:13px;}
+.content_moko .moko_span01{width:40px;display:inline-block;color:rgb(212,212,212);font-size:13px;line-height:20px;float:left}
+.content_moko .moko_span02{width:180;line-height:20px;color:rgb(212,212,212);float:left;text-decoration:none;display:inline-block;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.content_moko .moko_span_color{color:#888;}
